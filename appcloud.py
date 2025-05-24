@@ -3,9 +3,10 @@ import requests
 import random
 from datetime import datetime
 import re
-import os
 import urllib.parse
+import os
 
+# ✅ Get API key from secrets
 OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 
 st.set_page_config(page_title="BakchodAI – Meme Startup Generator", page_icon="🧠", layout="centered")
@@ -123,13 +124,13 @@ def generate_with_openrouter(prompt: str):
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost",
+        "HTTP-Referer": "https://yourappname.streamlit.app",  # Replace with your app’s actual URL
         "X-Title": "BakchodAI"
     }
     payload = {
         "model": "meta-llama/llama-3.1-8b-instruct:free",
         "messages": [
-            {"role": "system", "content": "You are a savage Gen-Z AI that generates spicy, dark, absurd, and meme-worthy fake startup ideas. No filters. Full bakchodi."},
+            {"role": "system", "content": "You are a savage Gen-Z AI that generates spicy, absurd, meme-worthy fake startup ideas. No filters. Full bakchodi."},
             {"role": "user", "content": prompt}
         ],
         "temperature": 0.85,
@@ -145,7 +146,6 @@ def generate_with_openrouter(prompt: str):
 # --- Generate Output ---
 if st.button("🚀 Generate Bakchod Ideas"):
     st.markdown(f"#### 🧠 Theme selected: <b>{theme}</b>", unsafe_allow_html=True)
-
     for _ in range(num_ideas):
         prompt = f"""
 Generate a fake Gen-Z startup idea about: "{theme}"
@@ -168,45 +168,31 @@ Meme Roast: [Roast line that belongs on a meme page]
             "Quote": r"Founder Quote:\s*(.+)",
             "Roast": r"Meme Roast:\s*(.+)"
         }
-        idea = {key: (re.search(pattern, llm_output, re.IGNORECASE).group(1).strip()
-                      if re.search(pattern, llm_output, re.IGNORECASE) else "⚠️ Could not generate.")
-                for key, pattern in patterns.items()}
+        idea = {k: (re.search(p, llm_output, re.IGNORECASE).group(1).strip()
+                    if re.search(p, llm_output, re.IGNORECASE) else "⚠️ Could not generate.") for k, p in patterns.items()}
 
-        # LinkedIn post generation
-        linkedin_prompt = f"""
-Write a witty, slightly cringe, 300-word LinkedIn-style startup launch post for a new company called "{idea['Name']}".
-Include sarcasm, emojis, hashtags, fake gratitude to a made-up team, and typical founder energy. Mention the tagline "{idea['Tagline']}".
-End with a call to action to support, fund, or join.
-"""
-        with st.spinner("📣 Writing your cringe founder launch post..."):
+        linkedin_prompt = f"""Write a witty, sarcastic 300-word LinkedIn post launching a fake startup named {idea['Name']} with tagline '{idea['Tagline']}'."""
+        with st.spinner("📣 Writing your cringe founder post..."):
             linkedin_post = generate_with_openrouter(linkedin_prompt)
-        st.info("📣 Founder post ready!")
 
         idea_text = f"""🚀 {idea['Name']}\n💬 {idea['Tagline']}\n🧄 {idea['Quote']}\n🔥 {idea['Roast']}"""
         encoded_text = urllib.parse.quote_plus(idea_text)
         twitter_url = f"https://twitter.com/intent/tweet?text={encoded_text}"
         linkedin_url = f"https://www.linkedin.com/sharing/share-offsite/?url=https://bakchodai.com&summary={encoded_text}"
 
-        # ✅ GOLD LOGO FIXED HERE
         st.markdown(f"""
 <div class="animated-card">
-    <img src='https://via.placeholder.com/100x100/FFD700/000000?text=🔥BZ' style='border-radius:50%;margin-bottom:16px;border:3px solid #FFD700;font-family:Orbitron,monospace;'>
+    <img src='https://via.placeholder.com/100x100/FFD700/000000?text=🔥BZ' style='border-radius:50%;margin-bottom:16px;border:3px solid #FFD700;'>
     <h3 style='color:#FFD700;'>🤖 {idea['Name']}</h3>
     <p><strong>💬 Tagline:</strong> {idea['Tagline']}</p>
     <p><strong>🧄 Founder Quote:</strong> {idea['Quote']}</p>
     <p><strong>🔥 Meme Roast:</strong> {idea['Roast']}</p>
 </div>
-""", unsafe_allow_html=True)
-
-        st.markdown(f"""
 <div class="button-strip">
     <a href="data:text/plain;charset=utf-8,{urllib.parse.quote(idea_text)}" download="{idea['Name'].replace(' ', '_')}.txt">⬇️ Download</a>
     <a href="{twitter_url}" target="_blank">🐦 Share on X</a>
     <a href="{linkedin_url}" target="_blank">🔗 Share on LinkedIn</a>
 </div>
-""", unsafe_allow_html=True)
-
-        st.markdown(f"""
 <div class="linked-post">
     <strong>📣 Founder Launch Post (LinkedIn Style)</strong><br><br>
     {linkedin_post}
