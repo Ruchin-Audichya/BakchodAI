@@ -5,9 +5,7 @@ from datetime import datetime
 import re
 import os
 import urllib.parse
-from dotenv import load_dotenv
 
-load_dotenv()
 OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 
 st.set_page_config(page_title="BakchodAI – Meme Startup Generator", page_icon="🧠", layout="centered")
