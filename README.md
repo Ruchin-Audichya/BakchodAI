@@ -1,111 +1,116 @@
-# 🧠 BakchodAI – Meme Startup Generator
+# 🧠 BakchodAI – The Meme Startup Generator
 
-Welcome to **BakchodAI** – the world's most *chaotic*, *Gen-Z-powered*, *meme-fueled* fake startup generator.  
-Ever wondered what happens when AI meets too much caffeine and pitch decks? You're about to find out. 💥
+Ever procrastinated so hard you accidentally built something viral? Welcome to **BakchodAI**, the most unhinged Gen-Z startup idea generator.
 
----
-
-## 🚀 What is this?
-
-BakchodAI is a Streamlit web app that generates **fake, sarcastic, meme-worthy startup ideas** using a locally hosted LLM.  
-It's:
-- 🤯 100% local (zero API calls)
-- 😂 Ridiculously funny
-- 🧘 Built for bakchods, by bakchods
+Built in 5 hours (during a DBMS exam crisis) and refined with extra sarcasm, BakchodAI creates memeable startup ideas that are sarcastic, unfiltered, and occasionally brilliant.
 
 ---
 
-## 🛠️ Features
+## 🚀 What is BakchodAI?
 
-- 🎯 Choose or write your own startup theme
-- 🧠 Powered by **Mistral** via **Ollama**
-- 💬 Generates:
-  - Startup Name
-  - Tagline
-  - Founder Quote
-  - Meme Roast
-- 📢 Instant LinkedIn-style launch post
-- 📎 Download idea or Tweet it
-- 💼 Built to go viral. Maybe.
+A terminal-style app that generates:
+
+- 🤯 Absurd startup names
+- 💬 Sarcastic taglines
+- 🧄 Founder quotes that belong on Twitter
+- 🔥 Meme roasts that would slap on Insta
+- 📣 Auto-generated LinkedIn launch posts
+
+It’s like Shark Tank met Reddit. And failed gloriously.
 
 ---
 
-## 🧪 Try it locally in 5 steps:
+## 🛠 Versions
 
-### 1. 🍵 Clone this beautiful chaos
-```bash
-<<<<<<< HEAD
-git clone https://github.com/yourusername/bakchodai.git
-cd bakchodai
-```
+### 1. 🌐 Cloud-Based Version (OpenRouter + LLaMA 3.1)
+Runs on top of `meta-llama/llama-3.1-8b-instruct:free` via OpenRouter API.
 
-### 2. 🐍 Create virtual environment (optional but smart)
-```bash
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-```
+### 2. 💻 Offline Local Version (Ollama)
+No internet? No problem. Load the LLaMA model locally with [Ollama](https://ollama.com/) and run BakchodAI fully offline.
 
-### 3. 📦 Install dependencies
+---
+
+## 📦 Features
+
+- Built with Streamlit 💻
+- Gold-plated UI for your hacker core aesthetic
+- Glitchy terminal vibes
+- Works without internet (Ollama version)
+- Downloadable text + instant sharing to X/Twitter + LinkedIn
+- Sarcastic, slightly unhinged UX by design
+
+---
+
+## 🧪 Demo
+
+📸 **Screenshots + Demo**: [Insert link to demo app or Replit]  
+📂 **GitHub Repo**: https://github.com/Ruchin-Audichya/BakchodAI
+
+---
+
+## 🧰 Setup
+
+### ▶️ For Cloud Version
+
 ```bash
+cd cloud-version
 pip install -r requirements.txt
-```
-
-### 4. 🧠 Install & Run Ollama with Mistral
-```bash
-# Install Ollama (if not already)
-curl -fsSL https://ollama.com/install.sh | sh
-
-# Pull Mistral model
-ollama pull mistral
-
-# Run Ollama in background
-ollama serve
-```
-
-> Ollama runs locally at `http://localhost:11434`  
-> The app sends your prompt there – no internet needed beyond the initial pull!
-
-### 5. 🌈 Launch the app
-```bash
 streamlit run app.py
 ```
 
-Open your browser to: [http://localhost:8501](http://localhost:8501)  
-And let the bakchodi begin. 🤌
+Make sure to set your OpenRouter API key in a `.env` file like:
+
+```
+OPENROUTER_API_KEY=sk-...
+```
+
+### 📴 For Local Version (Ollama)
+
+Make sure you have Ollama installed and LLaMA 3 model downloaded:
+
+```bash
+ollama run llama3
+```
+
+Then run the Streamlit app:
+
+```bash
+cd local-version
+streamlit run app.py
+```
 
 ---
 
-## 🤝 Credits
+## 🧠 Example Themes You Can Generate:
 
-Made with 💥 by [Ruchin](https://www.linkedin.com/in/ruchinaudi/)   
-Visuals, vibes and memes by the Internet™
+- "ChillumGPT – AI for stoners"  
+- "Rent-a-Slap™"  
+- "GhostShare – haunted co-living"  
+- "Uninstall Your Ex™"  
+- "Biryani Blockchain"  
+- "Startup Swaha"  
 
----
-
-## 🛠️ Tech Stack
-
-- Python + Streamlit
-- Ollama (Mistral LLM)
-- Custom CSS, Google Fonts
-- No external APIs. No chill.
+You can even add your own theme. Chaos is personalized.
 
 ---
 
-## 🤳 Wanna share the chaos?
+## 🤖 Built Using
 
-- Tweet your startup roast
-- Share the LinkedIn-style post
-- Or just download your idea and pitch it to your dog 🐶
+- [Streamlit](https://streamlit.io/) for UI
+- [OpenRouter](https://openrouter.ai/) for free access to LLaMA 3.1 models
+- [Ollama](https://ollama.com/) for blazing fast local inference
+
+---
+
+## 🧠 Author
+
+Made with 💀 by [**Ruchin Audichya**](https://linkedin.com/in/ruchin-audichya-95a5b6146)  
+Follow on [GitHub](https://github.com/Ruchin-Audichya) • [Instagram](https://instagram.com/ruchin_audichya) • [LinkedIn](https://linkedin.com/in/ruchin-audichya-95a5b6146)
 
 ---
 
-## ⚠️ Disclaimer
+## 📜 License
 
-This app generates nonsense. Don’t try to actually raise seed funding for “Rent-a-Slap™” or “Crypto™”.  
-But if you do, at least give us a shoutout. 😎
+MIT – use, fork, modify, and meme responsibly. 😎
 
----
-=======
-git clone https://github.com/Ruchin-Audichya/Bakchod-AI-v1.0-.git
-cd bakchodai
->>>>>>> 05081374649860d096ea7cb94e854569c0f5ca51
+> “Startup ideas so bad... they’re good.”
