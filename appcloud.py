@@ -10,7 +10,7 @@ import os
 try:
     OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 except:
-    OPENROUTER_API_KEY = "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"
+    OPENROUTER_API_KEY = "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"
 
 st.set_page_config(page_title="BakchodAI v2 – The Unhinged Evolution", page_icon="💀", layout="centered")
 
@@ -161,7 +161,7 @@ def generate_with_openrouter(prompt: str, chaos_multiplier: float = 0.7):
         "X-Title": "BakchodAI"
     }
     payload = {
-        "model": "moonshot/kimi-k2-instruct",
+        "model": "moonshotai/kimi-k2:free",
         "messages": [
             {"role": "system", "content": f"आप एक पूर्णतः निर्लज्ज, explicit और chaotic AI हैं जो desi bakchod startup ideas बनाते हैं। Chaos Level: {int(chaos_multiplier*10)}/10. " + ("आप extremely sexually explicit, politically incorrect content generate करते हैं। Gaali-galoch mandatory है। Use रंडी, भोसड़ी freely!" if chaos_multiplier > 0.8 else "आप controversial और hilarious content generate करते हैं। Adult humor allowed।" if chaos_multiplier > 0.5 else "आप sarcastic content generate करते हैं but decent रखते हैं।")},
             {"role": "user", "content": prompt}
@@ -267,7 +267,7 @@ Make it so cringe that even LinkedIn influencers would be embarrassed!"""
 st.markdown("""
 <div class="footer">
     <p>💀 Created with zero shame by <b>RUCHIN AUDICHYA</b> 💀</p>
-    <p>Powered by Kimi K2 Instruct • OpenRouter API • Pure Desi Chaos</p>
+    <p>Powered by Kimi K2 Free • OpenRouter API • Pure Desi Chaos</p>
     <p>
         <a href="https://github.com/Ruchin-Audichya" target="_blank" style="color: #00FF00; text-decoration: none; margin: 0 10px;">
             🐙 GitHub
