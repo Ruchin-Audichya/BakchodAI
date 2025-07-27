@@ -152,8 +152,19 @@ if st.checkbox("🔞 I have zero shame and want maximum chaos"):
 else:
     chaos_mode = False
 
+# Debug: Show API status
+with st.expander("🔧 API Debug Info"):
+    st.write(f"**API Key Status:** {'✅ Loaded' if OPENROUTER_API_KEY else '❌ Missing'}")
+    st.write(f"**Model:** moonshotai/kimi-k2:free")
+    if OPENROUTER_API_KEY:
+        masked_key = OPENROUTER_API_KEY[:10] + "..." + OPENROUTER_API_KEY[-10:]
+        st.write(f"**Key Preview:** {masked_key}")
+
 # --- OpenRouter API ---
 def generate_with_openrouter(prompt: str, chaos_multiplier: float = 0.7):
+    # Debug: Check if API key is properly loaded
+    if not OPENROUTER_API_KEY or OPENROUTER_API_KEY == "":
+        return "❌ API Key Error: No API key found. Please check configuration."
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
         "Content-Type": "application/json",
@@ -171,8 +182,20 @@ def generate_with_openrouter(prompt: str, chaos_multiplier: float = 0.7):
     }
     try:
         response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload)
+        
+        # Debug: Check response status
+        if response.status_code == 401:
+            return f"❌ Authentication Error: Invalid API key. Status: {response.status_code}"
+        elif response.status_code != 200:
+            return f"❌ API Error: HTTP {response.status_code} - {response.text}"
+            
         result = response.json()
-        return result["choices"][0]["message"]["content"] if "choices" in result else f"❌ API Error:\n{result}"
+        
+        if "choices" in result and len(result["choices"]) > 0:
+            return result["choices"][0]["message"]["content"]
+        else:
+            return f"❌ API Response Error: {result}"
+            
     except Exception as e:
         return f"⚠️ Exception: {str(e)}"
 
