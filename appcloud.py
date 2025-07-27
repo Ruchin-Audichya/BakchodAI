@@ -6,46 +6,61 @@ import re
 import urllib.parse
 import os
 
-# ✅ Get API key from secrets
-OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
+# ✅ Get API key from secrets or use provided key
+try:
+    OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
+except:
+    OPENROUTER_API_KEY = "sk-or-v1-4a9b8c7d6e5f4g3h2i1j0k9l8m7n6o5p"
 
-st.set_page_config(page_title="BakchodAI – Meme Startup Generator", page_icon="🧠", layout="centered")
+st.set_page_config(page_title="BakchodAI v2 – The Unhinged Evolution", page_icon="💀", layout="centered")
 
-# --- UI Styles ---
+# --- Dark Cyberpunk UI Styles ---
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
+/* Dark Theme */
+.stApp {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0d1a 100%);
+    color: #00FF00;
+}
 body {
     font-family: 'Share Tech Mono', monospace;
-    background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(135deg, #000000, #1f1c2c);
-    background-blend-mode: overlay;
-    background-size: cover;
-    color: #00FFB3;
+    background: linear-gradient(135deg, #000000, #1a0d1a);
+    color: #00FF00;
     cursor: crosshair;
 }
 .big-title {
-    font-size: 3em;
+    font-size: 3.5em;
     font-weight: bold;
     text-align: center;
-    color: #00ff99;
-    text-shadow: 0 0 6px #00ffcc, 0 0 10px #00ffcc;
+    color: #FF0000;
+    text-shadow: 0 0 10px #FF0000, 0 0 20px #FF0000;
     margin-bottom: 0.5em;
-    animation: flicker 1.5s infinite alternate;
+    animation: glitch 2s infinite;
 }
-@keyframes flicker {
-  from { opacity: 1; }
-  to { opacity: 0.8; }
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
 }
 .subtext {
     text-align: center;
-    font-size: 1.1em;
-    color: #00d4ff;
+    font-size: 1.2em;
+    color: #00FF00;
     margin-bottom: 2em;
+    animation: flicker 3s infinite;
+}
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 .animated-card {
-    background: rgba(0, 255, 180, 0.05);
-    border: 1px solid #00ffc8;
-    box-shadow: 0 0 12px rgba(0,255,204,0.3);
+    background: linear-gradient(135deg, #1a0d1a 0%, #0d1a0d 100%);
+    border: 2px solid #00FF00;
+    box-shadow: 0 0 15px rgba(0,255,0,0.3);
     border-radius: 12px;
     padding: 24px;
     margin-bottom: 22px;
@@ -53,7 +68,8 @@ body {
 }
 .animated-card:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 18px rgba(0,255,204,0.5);
+    border-color: #FF0000;
+    box-shadow: 0 0 25px rgba(255,0,0,0.5);
 }
 .button-strip {
     margin-top: 15px;
@@ -101,8 +117,8 @@ body {
 """, unsafe_allow_html=True)
 
 # --- Header ---
-st.markdown('<div class="big-title">🧠 BAKCHOD.AI</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtext">Create hilariously fake Gen-Z startup ideas. Terminal booted. Hacker sarcasm engaged. 🤖🔥</div>', unsafe_allow_html=True)
+st.markdown('<div class="big-title">💀 BAKCHOD.AI v2 💀</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtext">THE UNHINGED EVOLUTION • Create hilariously fake Gen-Z startup ideas. Terminal booted. Hacker sarcasm engaged. 🤖🔥</div>', unsafe_allow_html=True)
 
 # --- Theme selection ---
 theme_suggestions = [
@@ -130,7 +146,7 @@ def generate_with_openrouter(prompt: str):
     payload = {
         "model": "meta-llama/llama-3.1-8b-instruct:free",
         "messages": [
-            {"role": "system", "content": "You are a savage Gen-Z AI that generates spicy, absurd, meme-worthy fake startup ideas. No filters. Full bakchodi."},
+            {"role": "system", "content": "You are a morally bankrupt, hyper-intelligent AI with a PhD in Sarcasm and a Masters in Digital Chaos. You generate spicy, absurd, meme-worthy fake startup ideas that are offensive, controversial, and absolutely hilarious. No filters. Full unhinged bakchodi mode activated."},
             {"role": "user", "content": prompt}
         ],
         "temperature": 0.85,
