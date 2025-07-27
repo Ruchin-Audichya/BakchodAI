@@ -10,7 +10,7 @@ import os
 try:
     OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
 except:
-    OPENROUTER_API_KEY = "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"
+    OPENROUTER_API_KEY = "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"
 
 st.set_page_config(page_title="BakchodAI v2 – The Unhinged Evolution", page_icon="💀", layout="centered")
 
@@ -155,7 +155,7 @@ else:
 # Debug: Show API status
 with st.expander("🔧 API Debug Info"):
     st.write(f"**API Key Status:** {'✅ Loaded' if OPENROUTER_API_KEY else '❌ Missing'}")
-    st.write(f"**Model:** meta-llama/llama-4-scout:free")
+    st.write(f"**Model:** meta-llama/llama-3.1-8b-instruct:free")
     if OPENROUTER_API_KEY:
         masked_key = OPENROUTER_API_KEY[:10] + "..." + OPENROUTER_API_KEY[-10:]
         st.write(f"**Key Preview:** {masked_key}")
@@ -172,7 +172,7 @@ def generate_with_openrouter(prompt: str, chaos_multiplier: float = 0.7):
         "X-Title": "BakchodAI"
     }
     payload = {
-        "model": "meta-llama/llama-4-scout:free",
+        "model": "meta-llama/llama-3.1-8b-instruct:free",
         "messages": [
             {"role": "system", "content": f"You are an absolutely unhinged, explicit, and chaotic AI that generates desi bakchod startup ideas with zero filters. Chaos Level: {int(chaos_multiplier*10)}/10. " + ("Generate EXTREMELY sexually explicit, politically incorrect, and offensive content. Use gaali-galoch freely including words like रंडी, भोसड़ी, चूतिया. Make it so offensive that even Reddit would ban it!" if chaos_multiplier > 0.8 else "Generate controversial, sexually suggestive, and hilarious content. Adult humor and mild gaali-galoch allowed. Be savage but creative." if chaos_multiplier > 0.5 else "Generate sarcastic and funny content but keep it relatively decent while still being a savage roaster.")},
             {"role": "user", "content": prompt}
@@ -290,7 +290,7 @@ Make it so cringe that even LinkedIn influencers would be embarrassed!"""
 st.markdown("""
 <div class="footer">
     <p>💀 Created with zero shame by <b>RUCHIN AUDICHYA</b> 💀</p>
-    <p>Powered by Llama 4 Scout Free • OpenRouter API • Pure Desi Chaos</p>
+    <p>Powered by Llama 3.1 8B Free • OpenRouter API • Pure Desi Chaos</p>
     <p>
         <a href="https://github.com/Ruchin-Audichya" target="_blank" style="color: #00FF00; text-decoration: none; margin: 0 10px;">
             🐙 GitHub
